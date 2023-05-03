@@ -15,10 +15,10 @@ async def on_ready():
 
 @bot.command()
 async def hello(ctx):
-    await ctx.send(f'Привет! Я эко-мэн. я знаю команды: $plastik, $duck, $mem')
+    await ctx.send(f'Привет! Я эко-мэн. я знаю команды: $mem - по которой можно посмотреть мемчик))), $duck - по котрой вы увидите милую уточку), $plastik - по которой вы увидите картинки :как сортировать пластик: $stecklo - по которой вы увидите картинки :как сортировать стекло:')
 
 def get_duck_image_url():    
-    url = 'https://random.dog/woof.json'
+    url = 'https://random-d.uk/api/random'
     res = requests.get(url)
     data = res.json()
     return data['url']
@@ -31,7 +31,7 @@ async def duck(ctx):
     await ctx.send(image_url)
 
 
-@bot.command()
+@bot.command('mem')
 async def mem(ctx):
     img = random.choice(os.listdir("images"))
     with open(f'images/{img}', 'rb') as f:
@@ -40,7 +40,7 @@ async def mem(ctx):
    # Можем передавать файл как параметр!
     await ctx.send(file=picture)
 
-@bot.command()
+@bot.command('plastik')
 async def plastik(ctx):
     img = random.choice(os.listdir("plastik"))
     with open(f'plastik/{img}', 'rb') as f:
@@ -49,4 +49,13 @@ async def plastik(ctx):
    # Можем передавать файл как параметр!
     await ctx.send(file=picture)
 
-bot.run(" ")
+@bot.command('stecklo')
+async def stecklo(ctx):
+    img = random.choice(os.listdir("stecklo"))
+    with open(f'stecklo/{img}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+
+bot.run("")
+
